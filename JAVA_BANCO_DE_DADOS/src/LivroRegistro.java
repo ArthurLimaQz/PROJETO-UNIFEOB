@@ -1,8 +1,6 @@
-import java.util.Date;
-
 public class LivroRegistro {
     String Livro;
     int Folha;
-    Date Data;
+    String Data;
     int Termo;   
 }

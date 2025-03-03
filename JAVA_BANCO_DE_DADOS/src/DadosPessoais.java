@@ -1,8 +1,7 @@
-import java.util.Date;
+import java.time.LocalDate;
 public class DadosPessoais {
     String Nome;
     String Nome_Genitor;
     String Nome_Genitora;
-    Date Data_Nascimento;
-    
+    LocalDate Data_Nascimento;    
 }
