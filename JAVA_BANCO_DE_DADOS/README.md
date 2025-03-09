@@ -139,7 +139,7 @@ MySQL
 Bibliotecas JDBC
 IDE (IntelliJ, VS Code, NetBeans, Eclipse)
 
-🔹 Passo a passo
+🔹 Passo a passo<br>
 1️⃣ Clone o repositório<br>
 git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git
 
