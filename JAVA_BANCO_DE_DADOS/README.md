@@ -82,11 +82,11 @@ Definição: O polimorfismo permite que um mesmo método funcione de maneira dif
 📌 No código:
 
 A classe RegistroDao aceita qualquer objeto do tipo Pessoa no método save(), mas só insere no banco se for um Registro.
-Isso permite futuras expansões, como o cadastro de outros tipos de pessoas (exemplo: Funcionário, Cliente, etc.).
-public void save(Pessoa pessoa) {
-    if (pessoa instanceof Registro) {
-        Registro registro = (Registro) pessoa;
-        String sql = "INSERT INTO registro (termo, livro, folha, data_registro, nome, nome_genitor, nome_genitora, data_nascimento, sexo) " +
+Isso permite futuras expansões, como o cadastro de outros tipos de pessoas (exemplo: Funcionário, Cliente, etc.).<br>
+public void save(Pessoa pessoa) {<br>
+    if (pessoa instanceof Registro) {<br>
+        Registro registro = (Registro) pessoa;<br>
+        String sql = "INSERT INTO registro (termo, livro, folha, data_registro, nome, nome_genitor, nome_genitora, data_nascimento, sexo) " +<br>
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -114,18 +114,18 @@ Definição: O encapsulamento protege os dados dentro das classes, permitindo o 
 
 📌 No código:
 
-Todos os atributos das classes são privados (private).
-O acesso aos atributos é feito por métodos get e set, garantindo controle sobre os dados.
-public int getTermo() {
-    return termo;
+Todos os atributos das classes são privados (private).<br>
+O acesso aos atributos é feito por métodos get e set, garantindo controle sobre os dados.<br>
+public int getTermo() {<br>
+    return termo;<br>
 }
 
-public String getLivro() {
-    return livro;
+public String getLivro() {<br>
+    return livro;<br>
 }
 
-public int getFolha() {
-    return folha;
+public int getFolha() {<br>
+    return folha;<br>
 }
 
 public LocalDate getDataRegistro() {
@@ -144,19 +144,20 @@ IDE (IntelliJ, VS Code, NetBeans, Eclipse)
 git clone https://github.com/seu-repositorio/projeto-cartorio.git
 
 2️⃣ Configure o banco de dados MySQL
-CREATE DATABASE unifeob;
-USE unifeob;
-CREATE TABLE registro (
-    termo INT PRIMARY KEY,
-    livro VARCHAR(255),
-    folha INT,
-    data_registro DATE,
-    nome VARCHAR(255),
-    nome_genitor VARCHAR(255),
-    nome_genitora VARCHAR(255),
-    data_nascimento DATE,
+
+CREATE DATABASE unifeob;<br>
+USE unifeob;<br>
+CREATE TABLE registro (<br>
+    termo INT PRIMARY KEY,<br>
+    livro VARCHAR(255),<br>
+    folha INT,<br>
+    data_registro DATE,<br>
+    nome VARCHAR(255),<br>
+    nome_genitor VARCHAR(255),<br>
+    nome_genitora VARCHAR(255),<br>
+    data_nascimento DATE,<br>
     sexo VARCHAR(10)
-);
+);<br>
 3️⃣ Compile e execute a interface gráfica
 javac src/View/RegistroGUI.java
 java src/View/RegistroGUI
