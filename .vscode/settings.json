@@ -1,0 +1,10 @@
+{
+    "java.format.settings.url": ".vscode/java-formatter.xml",
+    "java.project.sourcePaths": [
+        "JAVA_BANCO_DE_DADOS/src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "JAVA_BANCO_DE_DADOS/lib/mysql-connector-j-9.2.0.jar"
+    ]
+}
