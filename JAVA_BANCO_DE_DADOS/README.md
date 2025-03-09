@@ -1,6 +1,8 @@
-## Getting Started
+## Sistema de Registro com Java e MySQL
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+📋 Sobre o Projeto
+
+Este projeto é um sistema de registro de cartório desenvolvido em Java utilizando Java Swing para a interface gráfica e MySQL<br>para armazenar os dados. Ele permite cadastrar, visualizar e excluir registros de forma intuitiva.
 
 ## Folder Structure
 
@@ -16,3 +18,4 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+    
