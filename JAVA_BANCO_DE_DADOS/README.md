@@ -46,7 +46,7 @@ public abstract class Pessoa {
     }
 
     public abstract void exibirInformacoes(); // Método abstrato
-}
+
 
 ➡ Benefício: Permite que outras classes derivem dessa estrutura sem precisar duplicar código.
 
@@ -73,7 +73,7 @@ public class Registro extends Pessoa {
         this.nomeGenitor = nomeGenitor;
         this.nomeGenitora = nomeGenitora;
     }
-}
+
 ➡ Benefício: Evita duplicação de código e mantém uma estrutura organizada.
 
 3️⃣ Polimorfismo
@@ -106,7 +106,7 @@ public void save(Pessoa pessoa) {
             ex.printStackTrace();
         }
     }
-}
+
 ➡ Benefício: Aumenta a flexibilidade do código, permitindo reutilização e expansão.
 
 4️⃣ Encapsulamento
