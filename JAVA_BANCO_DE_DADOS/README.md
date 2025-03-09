@@ -6,9 +6,9 @@ Este projeto é um sistema de registro de cartório desenvolvido em Java utiliza
 
 📌 Funcionalidades
 
-✅ Cadastro de Registros: O usuário pode inserir dados como nome, termo, livro, data de nascimento, entre outros.
-✅ Listagem de Registros: Os registros são carregados do banco e exibidos na interface gráfica.
-✅ Exclusão de Registros: O usuário pode selecionar um registro e excluí-lo do banco de dados.
+✅ Cadastro de Registros: O usuário pode inserir dados como nome, termo, livro, data de nascimento, entre outros.<br>
+✅ Listagem de Registros: Os registros são carregados do banco e exibidos na interface gráfica.<br>
+✅ Exclusão de Registros: O usuário pode selecionar um registro e excluí-lo do banco de dados.<br>
 
 📌 Estrutura do Código
 
