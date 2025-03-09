@@ -14,17 +14,17 @@ Este projeto é um sistema de registro de cartório desenvolvido em Java utiliza
 
 O projeto segue os princípios da Programação Orientada a Objetos (POO), aplicando Abstração, Herança, Polimorfismo e Encapsulamento.
 
-📂 src/
- ├── 📂 Controller/
+📂 src/<br>
+ ├── 📂 Controller/<br>
  │    ├── RegistroController.java
- ├── 📂 Dao/
+ <br>├── 📂 Dao/<br>
  │    ├── RegistroDao.java
- ├── 📂 Models/
- │    ├── Pessoa.java
- │    ├── Registro.java
+ <br>├── 📂 Models/<br>
+ │    ├── Pessoa.java<br>
+ │    ├── Registro.java<br>
  │    ├── Conexao.java
- ├── 📂 View/
- │    ├── RegistroGUI.java
+ <br>├── 📂 View/<br>
+ │    ├── RegistroGUI.java<br>
  │    ├── EntradaView.java
 
 📌 Aplicação dos Conceitos de POO
@@ -138,3 +138,33 @@ Java 8+
 MySQL
 Bibliotecas JDBC
 IDE (IntelliJ, VS Code, NetBeans, Eclipse)
+
+🔹 Passo a passo
+1️⃣ Clone o repositório
+git clone https://github.com/seu-repositorio/projeto-cartorio.git
+
+2️⃣ Configure o banco de dados MySQL
+CREATE DATABASE unifeob;
+USE unifeob;
+CREATE TABLE registro (
+    termo INT PRIMARY KEY,
+    livro VARCHAR(255),
+    folha INT,
+    data_registro DATE,
+    nome VARCHAR(255),
+    nome_genitor VARCHAR(255),
+    nome_genitora VARCHAR(255),
+    data_nascimento DATE,
+    sexo VARCHAR(10)
+);
+3️⃣ Compile e execute a interface gráfica
+javac src/View/RegistroGUI.java
+java src/View/RegistroGUI
+
+📌 Conclusão
+Este projeto implementa os conceitos fundamentais de POO (Programação Orientada a Objetos) em um sistema funcional de registro de cartório.
+
+🚀 Tecnologias utilizadas:
+✅ Java com Swing
+✅ Banco de Dados MySQL
+✅ Arquitetura MVC
