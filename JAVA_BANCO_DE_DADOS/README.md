@@ -140,8 +140,8 @@ Bibliotecas JDBC
 IDE (IntelliJ, VS Code, NetBeans, Eclipse)
 
 🔹 Passo a passo
-1️⃣ Clone o repositório
-git clone https://github.com/seu-repositorio/projeto-cartorio.git
+1️⃣ Clone o repositório<br>
+git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git
 
 2️⃣ Configure o banco de dados MySQL
 
