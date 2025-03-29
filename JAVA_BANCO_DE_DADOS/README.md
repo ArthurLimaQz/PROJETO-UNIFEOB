@@ -145,19 +145,26 @@ git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git
 
 2️⃣ Configure o banco de dados MySQL
 
-CREATE DATABASE unifeob;<br>
-USE unifeob;<br>
-CREATE TABLE registro (<br>
-    termo INT PRIMARY KEY,<br>
-    livro VARCHAR(255),<br>
-    folha INT,<br>
-    data_registro DATE,<br>
-    nome VARCHAR(255),<br>
-    nome_genitor VARCHAR(255),<br>
-    nome_genitora VARCHAR(255),<br>
-    data_nascimento DATE,<br>
-    sexo VARCHAR(10)
+CREATE DATABASE UNIFEOB;<br>
+USE UNIFEOB;<br>
+CREATE TABLE PESSOA (<br>
+    ID INT PRIMARY KEY AUTO_INCREMENT,<br>
+    Nome VARCHAR(50) NOT NULL,<br>
+    Sexo ENUM('M', 'F', 'Outro') NOT NULL,<br>
+    Data_nascimento DATE,<br>
+    Nome_genitor VARCHAR(50),<br>
+    Nome_genitora VARCHAR(50)<br>
 );<br>
+CREATE TABLE REGISTRO (<br>
+    ID INT PRIMARY KEY AUTO_INCREMENT,<br>
+    Termo INT NOT NULL,<br>
+    Livro VARCHAR(10) NOT NULL,<br>
+    Folha INT NOT NULL,<br>
+    Data_registro DATE NOT NULL,<br>
+    Id_Pessoa INT NOT NULL,<br>
+    CONSTRAINT FK_PESSOA_REGISTRO FOREIGN KEY (Id_Pessoa) REFERENCES PESSOA(ID) ON DELETE CASCADE<br>
+);<br>
+
 3️⃣ Compile e execute a interface gráfica
 javac src/View/RegistroGUI.java
 java src/View/RegistroGUI
