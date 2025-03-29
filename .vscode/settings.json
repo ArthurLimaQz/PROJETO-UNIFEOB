@@ -1,7 +1,8 @@
 {
     "java.format.settings.url": ".vscode/java-formatter.xml",
     "java.project.sourcePaths": [
-        "JAVA_BANCO_DE_DADOS/src"
+        "JAVA_BANCO_DE_DADOS/src",
+        "JAVA_BANCO_DE_DADOS"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
