@@ -5,8 +5,6 @@ import Dao.RegistroDao;
 import Models.Registro;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,8 +27,7 @@ public class RegistroGUI extends JFrame {
         setLayout(new BorderLayout());
 
         // Painel esquerdo (Lista de Registros)
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BorderLayout());
+        JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBackground(new Color(64, 60, 26));
 
         JLabel registrosLabel = new JLabel("REGISTROS", SwingConstants.CENTER);
@@ -41,8 +38,7 @@ public class RegistroGUI extends JFrame {
         listaRegistros = new JList<>(listModel);
         listaRegistros.setBackground(new Color(219, 190, 45));
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 1, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         listarButton = new JButton("Listar Registros");
         excluirButton = new JButton("Excluir Selecionado");
 
@@ -62,7 +58,6 @@ public class RegistroGUI extends JFrame {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Criando e adicionando os labels e campos
         addFormField(rightPanel, gbc, "Livro:", livroField = new JTextField());
         addFormField(rightPanel, gbc, "Folha:", folhaField = new JTextField());
         addFormField(rightPanel, gbc, "Termo:", termoField = new JTextField());
@@ -71,9 +66,8 @@ public class RegistroGUI extends JFrame {
         addFormField(rightPanel, gbc, "PAI:", nomeGenitorField = new JTextField());
         addFormField(rightPanel, gbc, "MÃE:", nomeGenitoraField = new JTextField());
         addFormField(rightPanel, gbc, "Data de Nascimento:", dataNascimentoField = new JTextField());
-        addFormField(rightPanel, gbc, "Sexo (M/F):", sexoField = new JTextField());
+        addFormField(rightPanel, gbc, "Sexo (M, F, Outro):", sexoField = new JTextField());
 
-        // Botão de Registrar
         gbc.gridx = 0;
         gbc.gridy++;
         gbc.gridwidth = 2;
@@ -82,34 +76,13 @@ public class RegistroGUI extends JFrame {
         registrarButton.setForeground(Color.WHITE);
         rightPanel.add(registrarButton, gbc);
 
-        // Adicionando os painéis ao layout principal
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
         splitPane.setDividerLocation(250);
         add(splitPane, BorderLayout.CENTER);
 
-        // Evento do botão "Registrar"
-        registrarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                salvarRegistro();
-            }
-        });
-
-        // Evento do botão "Listar Registros"
-        listarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listarRegistros();
-            }
-        });
-
-        // Evento do botão "Excluir Selecionado"
-        excluirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                excluirRegistro();
-            }
-        });
+        registrarButton.addActionListener(_ -> salvarRegistro());
+        listarButton.addActionListener(_ -> listarRegistros());
+        excluirButton.addActionListener(_ -> excluirRegistro());
 
         setVisible(true);
     }
@@ -127,6 +100,7 @@ public class RegistroGUI extends JFrame {
     }
 
     private void salvarRegistro() {
+        registrarButton.setEnabled(false);
         try {
             int termo = Integer.parseInt(termoField.getText());
             String livro = livroField.getText();
@@ -141,27 +115,26 @@ public class RegistroGUI extends JFrame {
             controller.registrar(termo, livro, folha, nome, nomeGenitor, nomeGenitora, dataNascimento, sexo, dataRegistro);
             JOptionPane.showMessageDialog(this, "Registro salvo com sucesso!");
             listarRegistros();
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage());
+        } finally {
+            registrarButton.setEnabled(true);
         }
     }
 
     private void listarRegistros() {
         listModel.clear();
         List<Registro> registros = registroDao.getAll();
-        for (Registro registro : registros) {
-            listModel.addElement("Termo: " + registro.getTermo() + " - Nome: " + registro.getNome());
-        }
+        registros.forEach(registro -> listModel.addElement("Termo: " + registro.getTermo() + " - Nome: " + registro.getNome()));
     }
 
     private void excluirRegistro() {
         String selecionado = listaRegistros.getSelectedValue();
         if (selecionado != null) {
-            int termo = Integer.parseInt(selecionado.split(" ")[1]); // Obtém o termo do registro selecionado
+            int termo = Integer.parseInt(selecionado.split(" ")[1]); // Ajuste conforme necessário
             registroDao.delete(termo);
             JOptionPane.showMessageDialog(this, "Registro excluído com sucesso!");
-            listarRegistros();
+            listarRegistros(); // Atualiza a lista após exclusão
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um registro para excluir.");
         }

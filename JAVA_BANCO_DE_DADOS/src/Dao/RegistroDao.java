@@ -17,21 +17,40 @@ public class RegistroDao {
     public void save(Pessoa pessoa) {
         if (pessoa instanceof Registro) {
             Registro registro = (Registro) pessoa;
-            String sql = "INSERT INTO registro (termo, livro, folha, data_registro, nome, nome_genitor, nome_genitora, data_nascimento, sexo) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, registro.getTermo());
-                ps.setString(2, registro.getLivro());
-                ps.setInt(3, registro.getFolha());
-                ps.setDate(4, java.sql.Date.valueOf(registro.getDataRegistro()));
-                ps.setString(5, registro.getNome());
-                ps.setString(6, registro.getNomeGenitor());
-                ps.setString(7, registro.getNomeGenitora());
-                ps.setDate(8, java.sql.Date.valueOf(registro.getDataNascimento()));
-                ps.setString(9, registro.getSexo());
-
-                ps.executeUpdate();
+    
+            String sqlPessoa = "INSERT INTO pessoa (nome, sexo, data_nascimento, nome_genitor, nome_genitora) VALUES (?, ?, ?, ?, ?)";
+            String sqlRegistro = "INSERT INTO registro (Id, termo, livro, folha, data_registro) VALUES (?, ?, ?, ?, ?)";
+    
+            try {
+                int pessoaId = -1;
+                try (PreparedStatement psPessoa = connection.prepareStatement(sqlPessoa, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                    psPessoa.setString(1, registro.getNome());
+                    psPessoa.setString(2, registro.getSexo());
+                    psPessoa.setDate(3, java.sql.Date.valueOf(registro.getDataNascimento()));
+                    psPessoa.setString(4, registro.getNomeGenitor());
+                    psPessoa.setString(5, registro.getNomeGenitora());
+                    psPessoa.executeUpdate();
+    
+                    // Recuperar o ID gerado automaticamente
+                    try (ResultSet rs = psPessoa.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            pessoaId = rs.getInt(1);
+                        }
+                    }
+                }
+    
+                // Inserir na tabela REGISTRO usando o ID gerado
+                if (pessoaId > 0) {
+                    try (PreparedStatement psRegistro = connection.prepareStatement(sqlRegistro)) {
+                        psRegistro.setInt(1, pessoaId); // Chave estrangeira
+                        psRegistro.setInt(2, registro.getTermo());
+                        psRegistro.setString(3, registro.getLivro());
+                        psRegistro.setInt(4, registro.getFolha());
+                        psRegistro.setDate(5, java.sql.Date.valueOf(registro.getDataRegistro()));
+                        psRegistro.executeUpdate();
+                    }
+                }
+    
                 System.out.println("✅ Registro salvo com sucesso!");
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -41,39 +60,72 @@ public class RegistroDao {
         }
     }
     public List<Registro> getAll() {
-    List<Registro> registros = new ArrayList<>();
-    String sql = "SELECT * FROM registro";
-
-    try (PreparedStatement ps = connection.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
-        while (rs.next()) {
-            Registro registro = new Registro(
-                rs.getInt("termo"),
-                rs.getString("livro"),
-                rs.getInt("folha"),
-                rs.getDate("data_registro").toLocalDate(),
-                rs.getString("nome"),
-                rs.getString("nome_genitor"),
-                rs.getString("nome_genitora"),
-                rs.getDate("data_nascimento").toLocalDate(),
-                rs.getString("sexo")
-            );
-            registros.add(registro);
+        List<Registro> registros = new ArrayList<>();
+        String sql = "SELECT r.termo, r.livro, r.folha, r.data_registro, " +
+                     "p.nome, p.nome_genitor, p.nome_genitora, p.data_nascimento, p.sexo " +
+                     "FROM registro r " +
+                     "JOIN pessoa p ON r.Id = p.Id";
+    
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+    
+            while (rs.next()) {
+                Registro registro = new Registro(
+                    rs.getInt("termo"),
+                    rs.getString("livro"),
+                    rs.getInt("folha"),
+                    rs.getDate("data_registro").toLocalDate(),
+                    rs.getString("nome"),  // Agora a coluna existe no resultado
+                    rs.getString("nome_genitor"),
+                    rs.getString("nome_genitora"),
+                    rs.getDate("data_nascimento").toLocalDate(),
+                    rs.getString("sexo")
+                );
+                registros.add(registro);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    }
-    return registros;
+        return registros;    
     }
     public void delete(int termo) {
-        String sql = "DELETE FROM registro WHERE termo=?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, termo);
-            ps.executeUpdate();
-            System.out.println("✅ Registro excluído com sucesso!");
+        String sqlGetId = "SELECT Id FROM registro WHERE termo=?";
+        String sqlRegistro = "DELETE FROM registro WHERE termo=?";
+        String sqlPessoa = "DELETE FROM pessoa WHERE Id=?";
+    
+        int pessoaId = -1;
+    
+        try {
+            // Recuperar o ID da pessoa associado ao termo
+            try (PreparedStatement psGetId = connection.prepareStatement(sqlGetId)) {
+                psGetId.setInt(1, termo);
+                try (ResultSet rs = psGetId.executeQuery()) {
+                    if (rs.next()) {
+                        pessoaId = rs.getInt("Id");
+                    }
+                }
+            }
+    
+            // Se encontrou um ID válido, prossegue para excluir
+            if (pessoaId > 0) {
+                try (PreparedStatement psRegistro = connection.prepareStatement(sqlRegistro)) {
+                    psRegistro.setInt(1, termo);
+                    psRegistro.executeUpdate();
+                }
+    
+                try (PreparedStatement psPessoa = connection.prepareStatement(sqlPessoa)) {
+                    psPessoa.setInt(1, pessoaId);
+                    psPessoa.executeUpdate();
+                }
+    
+                System.out.println("✅ Registro e Pessoa excluídos com sucesso!");
+            } else {
+                System.out.println("❌ Nenhuma pessoa encontrada para o termo informado.");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
+    
 }

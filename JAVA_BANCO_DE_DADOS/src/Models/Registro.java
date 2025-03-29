@@ -7,20 +7,19 @@ public class Registro extends Pessoa {
     private String livro;
     private int folha;
     private LocalDate dataRegistro;
-    private String nomeGenitor;
-    private String nomeGenitora;
+ 
 
     public Registro(int termo, String livro, int folha, LocalDate dataRegistro, 
-                    String nome, String nomeGenitor, String nomeGenitora, 
-                    LocalDate dataNascimento, String sexo) {
-        super(nome, dataNascimento, sexo);
+        String nome, String nomeGenitor, String nomeGenitora, 
+        LocalDate dataNascimento, String sexo) {
+        super(0, nome, dataNascimento, sexo, nomeGenitor, nomeGenitora); // Definindo Id como 0 caso não seja informado
         this.termo = termo;
         this.livro = livro;
         this.folha = folha;
         this.dataRegistro = dataRegistro;
-        this.nomeGenitor = nomeGenitor;
-        this.nomeGenitora = nomeGenitora;
-    }
+}
+
+
 
     // Getters e Setters
     public int getTermo() {
@@ -37,14 +36,6 @@ public class Registro extends Pessoa {
 
     public LocalDate getDataRegistro() {
         return dataRegistro;
-    }
-
-    public String getNomeGenitor() {
-        return nomeGenitor;
-    }
-
-    public String getNomeGenitora() {
-        return nomeGenitora;
     }
 
     @Override
