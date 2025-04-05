@@ -131,13 +131,13 @@ public int getFolha() {<br>
 public LocalDate getDataRegistro() {
     return dataRegistro;
 }
-➡ Benefício: Impede alterações indesejadas nos dados e melhora a segurança do sistema.
-📌 Como Executar o Projeto
-🔹 Pré-requisitos
-Java 8+
-MySQL
-Bibliotecas JDBC
-IDE (IntelliJ, VS Code, NetBeans, Eclipse)
+➡ Benefício: Impede alterações indesejadas nos dados e melhora a segurança do sistema.<br>
+📌 Como Executar o Projeto<br>
+🔹 Pré-requisitos<br>
+Java 8+<br>
+MySQL<br>
+Bibliotecas JDBC<br>
+IDE (IntelliJ, VS Code, NetBeans, Eclipse)<br>
 
 🔹 Passo a passo<br>
 1️⃣ Clone o repositório<br>
