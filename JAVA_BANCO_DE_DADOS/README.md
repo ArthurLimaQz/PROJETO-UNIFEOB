@@ -177,7 +177,7 @@ Este projeto implementa os conceitos fundamentais de POO (Programação Orientad
 ✅ Banco de Dados MySQL
 ✅ Arquitetura MVC
 
-ALUNOS:
+ALUNOS:<br>
 Arthur Lima de Queiroz RA 1012023200044 <br>
 Paulo Henrique Esberci RA 1012023200070<br>
 Matheus Ribeiro Ferreira RA 1012023100592<br>
