@@ -141,7 +141,8 @@ IDE (IntelliJ, VS Code, NetBeans, Eclipse)
 
 🔹 Passo a passo<br>
 1️⃣ Clone o repositório<br>
-git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git
+git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git<br>
+inicie o arquivo RegistroGUI
 
 2️⃣ Configure o banco de dados MySQL
 
