@@ -178,8 +178,8 @@ Este projeto implementa os conceitos fundamentais de POO (Programação Orientad
 ✅ Arquitetura MVC
 
 ALUNOS:
-Arthur Lima de Queiroz RA 1012023200044
-Paulo Henrique Esberci RA 1012023200070
-Matheus Ribeiro Ferreira RA 1012023100592
+Arthur Lima de Queiroz RA 1012023200044 <br>
+Paulo Henrique Esberci RA 1012023200070<br>
+Matheus Ribeiro Ferreira RA 1012023100592<br>
 Gabriel Silva Claro Batista RA 1012023200171
 
