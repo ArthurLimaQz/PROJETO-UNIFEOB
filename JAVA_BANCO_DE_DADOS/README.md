@@ -144,6 +144,14 @@ IDE (IntelliJ, VS Code, NetBeans, Eclipse)
 git clone https://github.com/ArthurLimaQz/PROJETO-UNIFEOB.git<br>
 inicie o arquivo RegistroGUI
 
+Abra o MySQL Workbench<br>
+
+Conecte ao seu servidor MySQL (usualmente chamado de “Local instance MySQL”)<br>
+
+Clique em "create a new sql tab for executing queries” (ícone do SQL com um +)<br>
+
+execute o código a seguir<br>
+
 2️⃣ Configure o banco de dados MySQL
 
 CREATE DATABASE UNIFEOB;<br>
